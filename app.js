@@ -2,7 +2,7 @@ const express=require('express');
 const movies=require('./movies.json');
 const crypto=require('crypto');
 const app=express();
-const {validateMovie}=require('./schemas/movies.js')
+const {validateMovie,validatePartialMovie}=require('./schemas/movies.js')
 
 
 app.use(express.json());
@@ -44,8 +44,28 @@ app.post("/movies",(req,res)=>{
     }
     movies.push(newMovie)
     res.status(201).json(newMovie)
+   
 })
 
+app.patch("/movies/:id",(req,res)=>{
+    
+    const result=validatePartialMovie(req.body)
+
+    if(!result.success){
+        return res.status(400).json({error:JSON.parse(result.error.message)})
+    }
+    const {id}=req.params
+    const movieIndex=movies.findIndex((movie)=>movie.id===id)
+
+    if(movieIndex===-1) {return res.status(404).json({message:"movie not found"})}
+
+    const updatedMovie={
+        ...movies[movieIndex],
+        ...result.data
+    }
+    movies[movieIndex]=updatedMovie
+    return res.json(updatedMovie)
+})
 app.listen(3000,()=>{
     console.log(`Server is running on port http://localhost:3000`);
 });
