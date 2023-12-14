@@ -2,17 +2,16 @@ const express=require('express');
 const movies=require('./movies.json');
 const crypto=require('crypto');
 const app=express();
+const cors=require('cors')
 const {validateMovie,validatePartialMovie}=require('./schemas/movies.js')
 
 
 app.use(express.json());
 app.disable('x-powered-by');
+app.use(cors())
 
 app.get('/movies',(req,res)=>{
-    res.header("Access-Control-Allow-Origin","*")
-
-    
-
+ 
     const {genre}=req.query
     if(genre){
     const filteredMovies=movies.filter(
