@@ -4,7 +4,7 @@ GET http://localhost:3000/movies
 
 
 ### recupere un film por id
-GET http://localhost:3000/movies/b6e03689-cccd-478e-8565-d92f40813b13
+GET http://localhost:3000/movies/2
 
 ### crea un nuevo film por un genero
 GET http://localhost:3000/movies?genre=Sci-Fi
@@ -27,15 +27,14 @@ Content-Type: application/json
 
 
 ### borra un film por id
-DELETE http://localhost:3000/movies/aa4ce05e-2b5d-4151-9ed2-3225265d33f7
+DELETE http://localhost:3000/movies/2
 ### actualiza un film por id
-PATCH http://localhost:3000/movies/aa4ce05e-2b5d-4151-9ed2-3225265d33f7
+PATCH http://localhost:3000/movies/1
 Content-Type: application/json
 
 {
   "title": "Run",
   "year": 2020,
   "director": "Aneesh Chaganty",
-  "duration": 90,
-  "genre": ["Horror", "Mystery", "Thriller"]
+  "duration": 90
 }

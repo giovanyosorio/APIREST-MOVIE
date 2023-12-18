@@ -1,4 +1,5 @@
-import {MovieModel} from '../models/movie.js'
+//import {MovieModel} from '../models/movie.js'
+import {MovieModel} from '../mysql/movie.js'
 import { validateMovie, validatePartialMovie } from '../schemas/movies.js';
 
 
@@ -42,7 +43,7 @@ export class MovieController{
 
     static async delete(req,res){
         const {id}=req.params
-        const result=await MovieModel.detele({id})
+        const result=await MovieModel.delete({id})
 
         if(result===null || result===false) {
             return res.status(404).json({message:"movie not found"})

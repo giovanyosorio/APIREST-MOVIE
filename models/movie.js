@@ -29,7 +29,7 @@ export class MovieModel{
         movies.push(newMovie)
         return newMovie
     }
-    static async detele({id}){
+    static async delete({id}){
         const movieIndex=movies.findIndex((movie)=>movie.id===id)
         if(movieIndex===-1) {return null}
         movies.splice(movieIndex,1)
